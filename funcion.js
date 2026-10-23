@@ -2434,7 +2434,7 @@ pdf.setTextColor(31, 41, 55);
 
 pdf.text(
     "II. DATOS TÉCNICOS DE LOS EQUIPOS",
-    20,
+    15,
     yInspeccion + 5
 );
 
@@ -3418,10 +3418,19 @@ body: Array.from(
     const accion =
         fila.querySelector(".riesgo-accion")?.value.trim() || "Sin acción correctiva indicada";
 
+
+            const numeroRiesgo =
+        String(indice + 1).padStart(2, "0");
+
     return [
-        String(indice + 1).padStart(2, "0") + ". " + aspecto,
+        numeroRiesgo + ". " + aspecto,
+
         titulo + "\n\n" + descripcion,
-        nivel + "\n\n" + String(indice + 1).padStart(2, "0") + ". " + titulo + ": " + descripcion,
+
+        nivel + "\n\n" +
+        numeroRiesgo + ". " + titulo +
+        "\n\n" + descripcion,
+
         accion
     ];
 }),
