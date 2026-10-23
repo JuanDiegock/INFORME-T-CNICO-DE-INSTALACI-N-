@@ -1239,7 +1239,6 @@ document.getElementById("generarEquipos").addEventListener(
                 <th>Excedente / Adicional a Facturar</th>
             </tr>
         </thead>
-
 <tbody>
     <tr data-unidad="m">
         <td><strong>Cable de Fuerza [Tipo / Calibre AWG]</strong></td>
@@ -1257,14 +1256,7 @@ document.getElementById("generarEquipos").addEventListener(
 
     <tr data-unidad="unidades">
         <td><strong>Terminales de compresión [Tipo / Medida]</strong></td>
-        <td><input type="number" class="material-estandar" data-base-estandar="" min="0" step="1" placeholder="Estándar por UPS"></td>
-        <td><input type="number" class="material-utilizado" min="0" step="1" placeholder="Ingrese cantidad"></td>
-        <td><input type="text" class="material-excedente" value="0 unidades" readonly></td>
-    </tr>
-
-    <tr data-unidad="unidades">
-        <td><strong>Tomás / Conectores Industriales (Mennekes)</strong></td>
-        <td><input type="text" class="material-estandar" data-base-estandar="2" value="2.0 unidades" readonly></td>
+        <td><input type="number" class="material-estandar" data-base-estandar="13" value="13" min="0" step="1" readonly></td>
         <td><input type="number" class="material-utilizado" min="0" step="1" placeholder="Ingrese cantidad"></td>
         <td><input type="text" class="material-excedente" value="0 unidades" readonly></td>
     </tr>
@@ -1789,20 +1781,21 @@ function generarReporteFotografico() {
         }
 
         crearItem(1, "Estado Inicial del Área");
-        crearItem(2, "Proceso de Maniobra y LOTO");
+        
 
-        // Ítem 3: se generan dos campos de foto por cada UPS.
-        for (let ups = 1; ups <= cantidadUPS; ups++) {
-            crearItem(
-                3,
-                "Montaje Físico de UPS",
-                String(ups).padStart(2, "0")
-            );
-        }
+       // Ítem 2: Montaje Físico de UPS.
+for (let ups = 1; ups <= cantidadUPS; ups++) {
+    crearItem(
+        2,
+        "Montaje Físico de UPS",
+        String(ups).padStart(2, "0")
+    );
+}
 
-        descripcionesFotos.forEach(item => {
-            crearItem(item.numero, item.titulo);
-        });
+// Los demás ítems continúan desde el número 3.
+descripcionesFotos.forEach((item, indice) => {
+    crearItem(indice + 3, item.titulo);
+});
 
         const botonAgregar = document.createElement("button");
         botonAgregar.type = "button";
