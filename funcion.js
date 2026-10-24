@@ -1686,15 +1686,14 @@ document.getElementById("generarEquipos").addEventListener(
     }
 
 const descripcionesFotos = [
-    { numero: 4, titulo: "Montaje y Fijación de Caja de Transferencia" },
-    { numero: 5, titulo: "Detalle de Cableado, Peinado y Borneras" },
-    { numero: 6, titulo: "Conectores / Tomas Industriales (Mennekes) y Salidas" },
-    { numero: 7, titulo: "Pantalla LCD de UPS - Modo Vacío" },
-    { numero: 8, titulo: "Pantalla LCD de UPS - Modo con Carga Real" },
-    { numero: 9, titulo: "Evidencia de Condición Anómala / Aire Acondicionado" },
-    { numero: 10, titulo: "Situación Final Panorámica y Limpieza del Área" }
+    { titulo: "Montaje y Fijación de Caja de Transferencia" },
+    { titulo: "Detalle de Cableado, Peinado y Borneras" },
+    { titulo: "Conectores / Tomas Industriales (Mennekes) y Salidas" },
+    { titulo: "Pantalla LCD de UPS - Modo Vacío" },
+    { titulo: "Pantalla LCD de UPS - Modo con Carga Real" },
+    { titulo: "Evidencia de Condición Anómala / Aire Acondicionado" },
+    { titulo: "Situación Final Panorámica y Limpieza del Área" }
 ];
-
 function generarReporteFotografico() {
     const contenedores = document.querySelectorAll(".reporteFotografico");
 
@@ -1780,22 +1779,31 @@ function generarReporteFotografico() {
             contenedor.appendChild(punto);
         }
 
+        // Ítem 1
         crearItem(1, "Estado Inicial del Área");
-        
 
-       // Ítem 2: Montaje Físico de UPS.
-for (let ups = 1; ups <= cantidadUPS; ups++) {
-    crearItem(
-        2,
-        "Montaje Físico de UPS",
-        String(ups).padStart(2, "0")
-    );
-}
+        // Ítem 2
+        crearItem(2, "Diagrama Unifilar");
 
-// Los demás ítems continúan desde el número 3.
-descripcionesFotos.forEach((item, indice) => {
-    crearItem(indice + 3, item.titulo);
-});
+        // Ítem 3
+        crearItem(3, "Tablero Eléctrico");
+
+        // Ítem 4 en adelante: montaje físico de cada UPS
+        for (let ups = 1; ups <= cantidadUPS; ups++) {
+            crearItem(
+                3 + ups,
+                "Montaje Físico de UPS",
+                String(ups).padStart(2, "0")
+            );
+        }
+
+        // Continuar la numeración de los ítems restantes
+        descripcionesFotos.forEach((item, indice) => {
+            crearItem(
+                4 + cantidadUPS + indice,
+                item.titulo
+            );
+        });
 
         const botonAgregar = document.createElement("button");
         botonAgregar.type = "button";
