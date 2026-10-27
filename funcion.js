@@ -695,13 +695,24 @@ document.getElementById("generarEquipos").addEventListener(
                     </div>
 
 
-                    <div class="campo">
+                     <div class="campo">
 
                         <label>Fecha del Servicio</label>
 
                         <input
                             type="date"
                             class="fecha-input">
+
+                    </div>
+
+                    <div class="campo">
+
+                        <label>Técnico Responsable</label>
+
+                        <input
+                            type="text"
+                            class="tecnico-responsable-input"
+                            placeholder="Ingrese el nombre del técnico">
 
                     </div>
 
@@ -2189,8 +2200,8 @@ function generarReporteFotografico() {
 
     const tecnicoResponsable =
         equipoActual.querySelector(
-            '.tabla-responsable input[type="text"]'
-        )?.value || "";
+            ".tecnico-responsable-input"
+        )?.value.trim() || "";
 
     pdf.setFont("helvetica", "bold");
     pdf.setFontSize(12);
